@@ -1,0 +1,1 @@
+docker run --name=GoManager --net=GoManager -it -p 8080:8080 --rm -v "%cd%":/go golang:latest
