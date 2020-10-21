@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+    web:
+        container_name: 'Gin_Gonic_Calculator'
+        #image: 'alephus/gogin_calc'
+        build:
+            context: '.'
+            dockerfile: 'Dockerfile'
+        ports:
+         - "8080:8080"
+        networks:
+         - alephus-network
+
+networks:
+    alephus-network:
+        driver: bridge
+     
