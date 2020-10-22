@@ -1,0 +1,1 @@
+do "docker-compose up" na pasta do projecto respectivo

@@ -5,20 +5,43 @@
 <div>
     <h1>Calculator!</h1>
     <form method="POST">
-        <input type="number" name="val1" value="0">
-        <select name="op">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
+        <input type="number" id="val1" name="val1" value="0">
+        <select name="op" id="op">
+            <option value="sum">+</option>
+            <option value="sub">-</option>
+            <option value="mult">*</option>
+            <option value="div">/</option>
+            <option value="res">%</option>
         </select>
-        <input type="number" name="val2" value="0">
-        <input type="submit" value="Calculate">
+        <input type="number" name="val2" id="val2" value="0">
+        <button id="btnCalc" type="button" class="btn btn-dark">Calculate</button>
       </form>
+
+      <div id="output" class="container"></div>
+      <script>
+        (function () {
+          var output = document.getElementById('output');
+
+          document.getElementById('btnCalc').onclick = function (context) {
+
+            const url = document.getElementById('op').value;
+            const params = new URLSearchParams();
+            params.append('val1', document.getElementById('val1').value);
+            params.append('val2', document.getElementById('val2').value);
+
+            axios.post(`${url}`, params)
+              .then(function (response) {
+                output.className = 'container';
+                output.innerHTML = response.data.res;
+              })
+              .catch(function (error) {
+                output.className = 'container text-danger';
+                output.innerHTML = error.message;
+              });
+          };
+        })();
+      </script>
 </div>
-  
-  
-  {{.result}}
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

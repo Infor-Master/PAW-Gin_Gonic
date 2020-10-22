@@ -6,6 +6,15 @@ func initializeRoutes() {
 
 	// Handle the index route
 	router.GET("/", showIndexPage)
-	router.GET("/calc", showCalcPage)
-	router.POST("/calc", doCalculation)
+
+	// Handle the calculator route
+	calc := router.Group("/calc")
+	{
+		calc.GET("/", showCalcPage)
+		calc.POST("/sum", doCalcSum)
+		calc.POST("/sub", doCalcSub)
+		calc.POST("/mult", doCalcMult)
+		calc.POST("/div", doCalcDiv)
+		calc.POST("/res", doCalcRes)
+	}
 }
